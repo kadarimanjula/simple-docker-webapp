@@ -29,13 +29,8 @@ pipeline {
           steps {
              sh 'mvn -B clean verify'
           }
-          post {
-             always {
-                junit testResults: 'target/surefire-reports/*.xml',
-                allowEmptyResults: true
-           }
-         }
-  }
+        
+ }
       stage('SonarQube Analysis') {
          steps {
               withSonarQubeEnv('SonarQube') {   // configured under ManageJenkins > System > SonarQube servers
