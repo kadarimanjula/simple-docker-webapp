@@ -30,8 +30,9 @@ pipeline {
              sh 'mvn -B clean verify'
           }
           post {
-          always {
-              junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true
+             always {
+                junit testResults: 'target/surefire-reports/*.xml',
+                allowEmptyResults: true
            }
          }
   }
