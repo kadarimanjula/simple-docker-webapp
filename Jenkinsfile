@@ -33,7 +33,7 @@ pipeline {
  }
       stage('SonarQube Analysis') {
          steps {
-              withSonarQubeEnv('SonarQube') {   // configured under ManageJenkins > System > SonarQube servers
+              withSonarQubeEnv('sonarqube') {   // configured under ManageJenkins > System > SonarQube servers
                   sh '''
                       mvn -B sonar:sonar \
                       -Dsonar.projectKey=simple-docker-webapp \
