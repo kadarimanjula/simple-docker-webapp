@@ -66,8 +66,8 @@ pipeline {
              )]) {
                   sh '''
                       echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                      docker push manjulakadari:simple-docker-webapp
-                      docker push manjulakadari:latest
+                      docker push manjulakadari/simple-docker-webapp:v1
+                      docker push manjulakadari/simple-docker-webapp:latest
                       docker logout
                   '''
                  }
