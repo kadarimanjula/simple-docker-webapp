@@ -9,7 +9,7 @@ pipeline {
 
   environment {
       DOCKERHUB_CRED_ID = 'dockerhub-credentials'       // Jenkins credential ID (Docker Hub username/token)
-      DOCKERHUB_REPO  = 'simple-docker-webapp/simple-docker-webapp'  
+      DOCKERHUB_REPO  = 'manjulakadari/simple-docker-webapp'  
       IMAGE_TAG       = "${env.BUILD_NUMBER}"
       CONTAINER_NAME  = 'simple-docker-webapp' 
       APP_PORT        = '8081'  
@@ -76,10 +76,10 @@ pipeline {
        stage('Deploy') {
           steps {
               sh """
-                 docker pull ${simple-docker-webapp}:latest
-                 docker stop ${docker-webapp} || true
-                 docker rm ${docker-webapp} || true
-                 docker run -d --name ${docker-webapp} -p ${8081}:8080 --restart unless-stopped ${simple-docker-webapp}:latest
+                 docker pull simple-docker-webapp:latest
+                 docker stop docker-webapp || true
+                 docker rm docker-webapp|| true
+                 docker run -d --name simple-docker-webapp -p 8081:8080 --restart unless-stopped simple-docker-webapp:latest
               """
           }
   }
@@ -87,7 +87,7 @@ pipeline {
           steps {
               sh """
                  for i in \$(seq 1 10); do
-                     if curl -sf http://localhost:${8081}/actuator/health; then
+                     if curl -sf http://localhost:8081/actuator/health; then
                           echo 'App is healthy'
                           exit 0
                      fi
