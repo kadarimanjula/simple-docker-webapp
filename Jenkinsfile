@@ -35,10 +35,8 @@ pipeline {
          steps {
               withSonarQubeEnv('sonarqube') {   // configured under ManageJenkins > System > SonarQube servers
                   sh '''
-                      mvn -B sonar:sonar \
-                      -Dsonar.projectKey=simple-docker-webapp \
-                      -Dsonar.projectName=simple-docker-webapp
-                      -DskipTests
+                       mvn -B sonar:sonar -Dsonar.projectKey=simple-docker-webapp -Dsonar.projectName=simple-docker-webapp -DskipTests
+                      
                   '''
                  }
          }
