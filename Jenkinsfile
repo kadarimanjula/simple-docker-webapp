@@ -51,9 +51,14 @@ pipeline {
        stage('Build Docker Image') {
           steps {
               sh '''
+                 echo "Building Docker image..."
                  docker build \
-                 -t "$DOCKERHUB_REPO:$IMAGE_TAG" \
-                 -t "$DOCKERHUB_REPO:latest" .
+                   -t "$DOCKERHUB_REPO:$IMAGE_TAG" \
+                   -t "$DOCKERHUB_REPO:latest" .
+                   echo "Checking created images..."
+                   docker images
+
+                   docker image inspect "$DOCKERHUB_REPO:$IMAGE_TAG"
                '''
           }
   }
