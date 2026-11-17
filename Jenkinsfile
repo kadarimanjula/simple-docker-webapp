@@ -55,11 +55,15 @@ pipeline {
   }
        stage('Push to Docker Hub') {
           steps {
-             withCredentials([usernamePassword(credentialsId:DOCKERHUB_CRED_ID, usernameVariable: 'DOCKER_USER', passwordVariable:'DOCKER_PASS')]) {
+             withCredentials([usernamePassword(
+               credentialsId:DOCKERHUB_CRED_ID, 
+               usernameVariable: 'DOCKER_USER', 
+               passwordVariable:'DOCKER_PASS'
+             )]) {
                   sh '''
                       echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                      docker push ${DOCKERHUB_REPO}:${IMAGE_TAG}
-                      docker push ${DOCKERHUB_REPO}:latest
+                      docker push manjulakadari/simple-docker-webapp:v1
+                      docker push manjulakadari/simple-docker-webapp:latest
                       docker logout
                   '''
                  }
