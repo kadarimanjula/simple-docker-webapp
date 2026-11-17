@@ -50,7 +50,11 @@ pipeline {
   }
        stage('Build Docker Image') {
           steps {
-              sh "docker build -t ${DOCKERHUB_REPO}:${IMAGE_TAG} -t ${DOCKERHUB_REPO}:latest ."
+              sh "
+                 docker build \
+                 -t ${DOCKERHUB_REPO}:${IMAGE_TAG} \
+                 -t ${DOCKERHUB_REPO}:latest .
+               "
           }
   }
        stage('Push to Docker Hub') {
@@ -62,8 +66,8 @@ pipeline {
              )]) {
                   sh '''
                       echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                      docker push manjulakadari/simple-docker-webapp:v1
-                      docker push manjulakadari/simple-docker-webapp:latest
+                      docker push manjulakadari:simple-docker-webapp
+                      docker push manjulakadari:latest
                       docker logout
                   '''
                  }
