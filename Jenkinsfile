@@ -82,8 +82,8 @@ pipeline {
           steps {
               sh """
                  docker pull "$DOCKERHUB_REPO:$IMAGE_TAG"
-                 docker stop docker-webapp || true
-                 docker rm docker-webapp|| true
+                 docker stop simple-docker-webapp || true
+                 docker rm simple-docker-webapp|| true
                  docker run -d --name simple-docker-webapp -p 8081:8080 --restart unless-stopped "$DOCKERHUB_REPO:$IMAGE_TAG"
               """
           }
